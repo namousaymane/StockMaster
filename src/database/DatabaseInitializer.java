@@ -59,7 +59,6 @@ public class DatabaseInitializer {
                     """;
             stmt.executeUpdate(createMouvementTable);
             System.out.println("Table mouvement_stock created successfully");
-
             System.out.println("Database initialization completed successfully!");
 
         } catch (SQLException e) {
