@@ -3,12 +3,12 @@ package models;
 //Difference par rapport a produit, c'est l'ajout de la duree de garantie (en mois)
 
 public class ProduitElectronique extends Produit {
-    private String datePeremption;
+    private String garantieMois;
 
     public ProduitElectronique(int id, String nom, double prix, int quantite, int categorieId, int fournisseurID,
-            String description, String datePeremption) {
+            String description, String garantieMois) {
         super(id, nom, prix, quantite, categorieId, fournisseurID, description);
-        this.datePeremption = datePeremption;
+        this.garantieMois = garantieMois;
     }
 
     @Override
@@ -16,7 +16,7 @@ public class ProduitElectronique extends Produit {
         return "Électro";
     }
 
-    public String getDatePeremption() {
-        return datePeremption;
+    public String getGarantieMois() {
+        return garantieMois;
     }
 }
