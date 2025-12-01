@@ -5,13 +5,16 @@ package models;
 public class ProduitPerissable extends Produit {
     private String datePeremption;
 
-    public ProduitPerissable(int id, String nom, double prix, int quantite, int categorieId, int fournisseurID) {
-        super(id, nom, prix, quantite, categorieId, fournisseurID);
+    public ProduitPerissable(int id, String nom, double prix, int quantite, int categorieId, int fournisseurID,
+            String description) {
+        super(id, nom, prix, quantite, categorieId, fournisseurID, description);
         this.datePeremption = datePeremption;
     }
 
     @Override
-    public String getType() { return "Perrisable"; }
+    public String getType() {
+        return "Perrisable";
+    }
 
     public String getDatePeremption() {
         return datePeremption;
