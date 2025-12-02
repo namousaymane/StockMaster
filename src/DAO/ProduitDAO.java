@@ -1,6 +1,5 @@
-package dao;
+package DAO;
 
-import dao.*;
 import database.DatabaseConn;
 import models.*;
 import java.sql.*;

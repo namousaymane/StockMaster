@@ -1,4 +1,4 @@
-import dao.*;
+import DAO.*;
 import models.*;
 import exceptions.*;
 
@@ -34,11 +34,21 @@ public class Main {
 
             try {
                 switch (choix) {
-                    case 1: menuFournisseurs(); break;
-                    case 2: menuProduits(); break;
-                    case 3: menuStocks(); break;
-                    case 4: menuRapports(); break;
-                    case 5: exporterCSV(); break;
+                    case 1:
+                        menuFournisseurs();
+                        break;
+                    case 2:
+                        menuProduits();
+                        break;
+                    case 3:
+                        menuStocks();
+                        break;
+                    case 4:
+                        menuRapports();
+                        break;
+                    case 5:
+                        exporterCSV();
+                        break;
                     case 0:
                         System.out.println("Fermeture du programme...");
                         System.exit(0);
@@ -79,9 +89,7 @@ public class Main {
                 if (fournisseurs.isEmpty()) {
                     System.out.println("Aucun fournisseur disponible.");
                 } else {
-                    fournisseurs.forEach(f ->
-                            System.out.printf("ID: %d | Nom: %s%n", f.getId(), f.getNom())
-                    );
+                    fournisseurs.forEach(f -> System.out.printf("ID: %d | Nom: %s%n", f.getId(), f.getNom()));
                 }
                 break;
 
@@ -134,10 +142,8 @@ public class Main {
                 if (produits.isEmpty()) {
                     System.out.println("Aucun produit disponible.");
                 } else {
-                    produits.forEach(p ->
-                            System.out.printf("ID: %d | %s | Type: %s | Prix: %.2f dhs | Stock: %d%n",
-                                    p.getId(), p.getNom(), p.getType(), p.getPrix(), p.getQuantite())
-                    );
+                    produits.forEach(p -> System.out.printf("ID: %d | %s | Type: %s | Prix: %.2f dhs | Stock: %d%n",
+                            p.getId(), p.getNom(), p.getType(), p.getPrix(), p.getQuantite()));
                 }
                 break;
 
@@ -254,8 +260,7 @@ public class Main {
                 // Sortie de stock
                 if (produit.getQuantite() < quantite) {
                     throw new StockInsuffisantException(
-                            "Stock insuffisant pour " + nom + " (disponible: " + produit.getQuantite() + ")"
-                    );
+                            "Stock insuffisant pour " + nom + " (disponible: " + produit.getQuantite() + ")");
                 }
                 int nouvelleQuantite = produit.getQuantite() - quantite;
                 if (produitDAO.updateQuantite(nom, nouvelleQuantite)) {
@@ -288,9 +293,7 @@ public class Main {
                 if (stockFaible.isEmpty()) {
                     System.out.println("Aucun produit en stock faible.");
                 } else {
-                    stockFaible.forEach(p ->
-                            System.out.printf("%s : %d unités%n", p.getNom(), p.getQuantite())
-                    );
+                    stockFaible.forEach(p -> System.out.printf("%s : %d unités%n", p.getNom(), p.getQuantite()));
                 }
                 break;
 
@@ -298,9 +301,7 @@ public class Main {
                 System.out.println("\n=== PRODUITS TRIÉS PAR PRIX ===");
                 produits.stream()
                         .sorted(Comparator.comparingDouble(Produit::getPrix))
-                        .forEach(p ->
-                                System.out.printf("%s : %.2f dhs%n", p.getNom(), p.getPrix())
-                        );
+                        .forEach(p -> System.out.printf("%s : %.2f dhs%n", p.getNom(), p.getPrix()));
                 break;
 
             case 3:
@@ -308,9 +309,8 @@ public class Main {
                 Map<Integer, Long> comptage = produits.stream()
                         .collect(Collectors.groupingBy(Produit::getCategorieId, Collectors.counting()));
 
-                comptage.forEach((catId, count) ->
-                        System.out.printf("Catégorie ID %d : %d produit(s)%n", catId, count)
-                );
+                comptage.forEach(
+                        (catId, count) -> System.out.printf("Catégorie ID %d : %d produit(s)%n", catId, count));
                 break;
 
             default:
@@ -331,10 +331,8 @@ public class Main {
                 writer.printf("%d,%s,%s,%.2f,%d,%d,%d,%s%n",
                         p.getId(), p.getNom(), p.getType(), p.getPrix(),
                         p.getQuantite(), p.getCategorieId(), p.getFournisseurId(),
-                        p instanceof ProduitPerissable ?
-                                ((ProduitPerissable)p).getDatePeremption() :
-                                ((ProduitElectronique)p).getGarantieMois()
-                );
+                        p instanceof ProduitPerissable ? ((ProduitPerissable) p).getDatePeremption()
+                                : ((ProduitElectronique) p).getGarantieMois());
             }
 
             System.out.println("Inventaire exporté dans " + fichier);
@@ -343,7 +341,6 @@ public class Main {
             System.err.println("Erreur lors de l'export : " + e.getMessage());
         }
     }
-
 
     // Fonctions internes
     private static int lireEntier() {
