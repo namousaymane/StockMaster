@@ -13,7 +13,7 @@ public class ProduitPerissable extends Produit {
 
     @Override
     public String getType() {
-        return "Perrisable";
+        return "Périssable";
     }
 
     public String getDatePeremption() {
