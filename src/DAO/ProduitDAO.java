@@ -109,7 +109,7 @@ public class ProduitDAO {
 				if ("Électro".equals(type)) {
 					return new ProduitElectronique(id, nom, prix, quantite, categorieId,
 							fournisseurId, description, datePeremption);
-				} else if ("Perrisable".equals(type)) {
+				} else if ("Périssable".equals(type)) {
 					return new ProduitPerissable(id, nom, prix, quantite, categorieId,
 							fournisseurId, description, datePeremption);
 				}
